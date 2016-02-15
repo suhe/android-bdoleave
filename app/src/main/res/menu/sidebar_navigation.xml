@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/myleave"
+            android:icon="@drawable/abc_ic_menu_copy_mtrl_am_alpha"
+            android:title="@string/my_leave"></item>
+        <item
+            android:id="@+id/balance_card"
+            android:icon="@drawable/abc_ic_menu_copy_mtrl_am_alpha"
+            android:title="@string/balance_card"></item>
+        <item
+            android:id="@+id/to_be_approval"
+            android:icon="@drawable/abc_ic_menu_copy_mtrl_am_alpha"
+            android:title="@string/to_be_approval"></item>
+    </group>
+</menu>
