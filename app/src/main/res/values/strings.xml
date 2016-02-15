@@ -5,6 +5,7 @@
     <string name="already_registered">Already Registered</string>
     <string name="back_to_login">Back to Login</string>
     <string name="balance_card">Balance Card</string>
+    <string name="change_password">Change Password</string>
     <string name="closeDrawer">Navigation View</string>
     <string name="fullname">Fullname</string>
     <string name="login">Login</string>
