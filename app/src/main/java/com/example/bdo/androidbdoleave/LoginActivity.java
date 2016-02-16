@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.bdo.androidbdoleave.config.app;
+import com.example.bdo.androidbdoleave.helpers.Auth;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -47,11 +48,21 @@ public class LoginActivity extends Activity  {
     String employeeid;
     String password;
 
+    private Auth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        //auth for check login
+        auth = new Auth(getApplicationContext());
+        if(auth.isLogin()) {
+            Intent i = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(i);
+            finish();
+        }
 
         txtemployeeid = (EditText) findViewById(R.id.nik);
         txtpassword = (EditText) findViewById(R.id.password);
@@ -62,7 +73,22 @@ public class LoginActivity extends Activity  {
             public void onClick(View view) {
                 employeeid = txtemployeeid.getText().toString();
                 password = txtpassword.getText().toString();
-                getLogin(employeeid, password);
+
+                boolean isEmployeeID = true;
+                boolean isPassword = true;
+                if(employeeid.length() == 0 ) {
+                    isEmployeeID = false;
+                    txtemployeeid.setError("required, Please fill field NIK");
+                }
+
+                if(password.length() == 0) {
+                    isPassword = false;
+                    txtpassword.setError("required, Please fill field Password");
+                }
+
+                if(isEmployeeID == true && isPassword == true) {
+                    getLogin(employeeid, password);
+                }
             }
         });
     }
@@ -120,14 +146,20 @@ public class LoginActivity extends Activity  {
 
                 JSONObject object = null;
                 int jsonResult  = 0;
+                String jsonID = "";
+                String jsonName = "";
+                String jsonEmail = "";
                 try {
                     object = new JSONObject(s);
                     jsonResult = object.getInt("success");
+                    jsonID = object.getString("employee_id");
+                    jsonName = object.getString("employee_name");
+                    jsonEmail = object.getString("employee_email");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                System.out.println("Resulted Value: " + s);
+                System.out.println("Resulted Value: " + jsonName);
 
                 if(s.equals("") || s == null){
                     Toast.makeText(LoginActivity.this, "Server connection failed", Toast.LENGTH_LONG).show();
@@ -136,9 +168,10 @@ public class LoginActivity extends Activity  {
                     Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_LONG).show();
                     return;
                 } else if(jsonResult == 1) {
+                    //put to auth
+                    auth.login(true);
+                    auth.setName(jsonName);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("EMPLOYEEID", employeeid);
-                    intent.putExtra("MESSAGE", "You have been successfully login");
                     startActivity(intent);
                 }
             }

@@ -3,6 +3,7 @@ package com.example.bdo.androidbdoleave;
 /**
  * Created by suhe on 13/02/16.
  */
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,20 +13,38 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.FragmentTransaction;
+
+import com.example.bdo.androidbdoleave.helpers.Auth;
 
 public class MainActivity extends AppCompatActivity {
     //defining variabel
     private Toolbar toolbar;
     private NavigationView nav;
     private DrawerLayout drawerLayout;
+    private Auth auth;
+    public TextView tvEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        /**
+         * Declaration of Component
+         */
+        auth = new Auth(getApplicationContext());
+        tvEmail = (TextView) findViewById(R.id.email);
+        tvEmail.setText(auth.getName().toString());
+        /**
+         *  Check Auth Login
+         */
+
+        if(!auth.isLogin()){
+            toPageLogin();
+        }
         /**
          * Android First Layout Launcher
          * Default Fragment
@@ -50,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawers();
 
                 switch (menuItem.getItemId()) {
-                    case R.id.inbox :
+                    case R.id.myleave :
                         Toast.makeText(getApplicationContext(),"Inbox Selected",Toast.LENGTH_SHORT).show();
                         ContentFragment fragment = new ContentFragment();
                         FragmentTransaction fragmentTrans = getSupportFragmentManager().beginTransaction();
@@ -91,10 +110,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_change_password) {
-            return true;
+        switch (id) {
+            case R.id.action_logout :
+                toPageLogin();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void toPageLogin() {
+        auth.logout();
+        Intent i = new Intent(MainActivity.this,LoginActivity.class);
+        startActivity(i);
+        finish();
     }
 }
