@@ -15,8 +15,6 @@ import android.view.View;
 import android.widget.Toast;
 import android.support.v4.app.FragmentTransaction;
 
-import com.example.bdo.androidbdoleave.models.ContentFragment;
-
 public class MainActivity extends AppCompatActivity {
     //defining variabel
     private Toolbar toolbar;

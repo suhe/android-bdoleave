@@ -1,4 +1,4 @@
-package com.example.bdo.androidbdoleave.models;
+package com.example.bdo.androidbdoleave;
 
 /**
  * Created by suhe on 14/02/16.
