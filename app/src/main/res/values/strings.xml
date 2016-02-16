@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Leave(BDO)</string>
+    <string name="app_name">LMS BDO</string>
     <string name="action_settings">Action Setting</string>
     <string name="already_registered">Already Registered</string>
     <string name="back_to_login">Back to Login</string>

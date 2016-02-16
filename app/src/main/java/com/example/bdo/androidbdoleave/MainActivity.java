@@ -28,6 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        /**
+         * Android First Layout Launcher
+         * Default Fragment
+         */
+        ContentFragment fragment = new ContentFragment();
+        FragmentTransaction fragmentTrans = getSupportFragmentManager().beginTransaction();
+        fragmentTrans.replace(R.id.frame, fragment);
+        fragmentTrans.commit();
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
