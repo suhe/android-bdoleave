@@ -14,9 +14,9 @@ public class Auth {
 
     private static final String PREF_NAME = "Auth";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
-    //public static final String ID = "employee_id";
+    public static final String ID = "employee_id";
     public static final String NAME = "employee_name";
-    //public static final String EMAIL = "employee_email";
+    public static final String EMAIL = "employee_email";
 
 
     public Auth(Context context) {
@@ -38,15 +38,32 @@ public class Auth {
         return preferences.getBoolean(KEY_IS_LOGGED_IN,false);
     }
 
+    public void setId(String data) {
+        editor.putString(ID,data);
+        editor.commit();
+    }
+
+    public String getId() {
+        return preferences.getString(ID, "DEFAULT");
+    }
+
     public void setName(String data) {
         editor.putString(NAME,data);
         editor.commit();
     }
 
     public String getName() {
-        return preferences.getString(NAME,"DEFAULT");
+        return preferences.getString(NAME, "DEFAULT");
     }
 
+    public void setEmail(String data) {
+        editor.putString(EMAIL,data);
+        editor.commit();
+    }
+
+    public String getEmail() {
+        return preferences.getString(EMAIL, "DEFAULT");
+    }
 
 
 

@@ -181,9 +181,4 @@ public class LoginActivity extends Activity  {
         login.execute(employeeid,password);
 
     }
-
-
-
-
-
 }

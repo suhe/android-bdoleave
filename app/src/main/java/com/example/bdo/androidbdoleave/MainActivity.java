@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView nav;
     private DrawerLayout drawerLayout;
     private Auth auth;
-    public TextView tvEmail;
+    public TextView tvEmail,tvName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         auth = new Auth(getApplicationContext());
         tvEmail = (TextView) findViewById(R.id.email);
         tvEmail.setText(auth.getName().toString());
+        tvName.setText(auth.getName().toString());
         /**
          *  Check Auth Login
          */
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
          * Android First Layout Launcher
          * Default Fragment
          */
-        ContentFragment fragment = new ContentFragment();
+        MyLeaveActivity fragment = new MyLeaveActivity();
         FragmentTransaction fragmentTrans = getSupportFragmentManager().beginTransaction();
         fragmentTrans.replace(R.id.frame, fragment);
         fragmentTrans.commit();
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.myleave :
                         Toast.makeText(getApplicationContext(),"Inbox Selected",Toast.LENGTH_SHORT).show();
-                        ContentFragment fragment = new ContentFragment();
+                        MyLeaveActivity fragment = new MyLeaveActivity();
                         FragmentTransaction fragmentTrans = getSupportFragmentManager().beginTransaction();
                         fragmentTrans.replace(R.id.frame, fragment);
                         fragmentTrans.commit();
