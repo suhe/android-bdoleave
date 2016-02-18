@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.FragmentTransaction;
-
 import com.example.bdo.androidbdoleave.helpers.Auth;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
          */
         auth = new Auth(getApplicationContext());
         tvEmail = (TextView) findViewById(R.id.email);
-        tvEmail.setText(auth.getName().toString());
+        tvName = (TextView) findViewById(R.id.name);
+        tvEmail.setText(auth.getEmail().toString());
         tvName.setText(auth.getName().toString());
         /**
          *  Check Auth Login
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
          * Android First Layout Launcher
          * Default Fragment
          */
+
         MyLeaveActivity fragment = new MyLeaveActivity();
         FragmentTransaction fragmentTrans = getSupportFragmentManager().beginTransaction();
         fragmentTrans.replace(R.id.frame, fragment);

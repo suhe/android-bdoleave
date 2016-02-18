@@ -51,6 +51,7 @@ public class LoginActivity extends Activity  {
     private Auth auth;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +129,7 @@ public class LoginActivity extends Activity  {
                         sb.append(line + "\n");
                     }
                     result = sb.toString();
+
                 } catch (ClientProtocolException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
@@ -149,6 +151,7 @@ public class LoginActivity extends Activity  {
                 String jsonID = "";
                 String jsonName = "";
                 String jsonEmail = "";
+
                 try {
                     object = new JSONObject(s);
                     jsonResult = object.getInt("success");
@@ -170,7 +173,9 @@ public class LoginActivity extends Activity  {
                 } else if(jsonResult == 1) {
                     //put to auth
                     auth.login(true);
+                    auth.setId(jsonID);
                     auth.setName(jsonName);
+                    auth.setEmail(jsonEmail);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
